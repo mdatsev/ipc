@@ -55,15 +55,12 @@ int main()
 	while (keepRunning)
 	{
 		//printf("%d\n", writes++);
-		//usleep(1000);
 		//sleep(1);
-		generate((void *)buffer->array[buffer->wr_pos], seed);
-
+		generate((void *)buffer->array[buffer->wr_pos % CYCLIC_BUFFER_SIZE], seed);
 		printf("generated at [%lu] with seed %d\n", buffer->wr_pos, seed);
 		buffer->wr_pos++;
-		buffer->wr_pos %= CYCLIC_BUFFER_SIZE;
-		//if (writes++ == 9000) continue; //test discontinuity check
 		seed++;
+		//if (writes++ == 9000) continue; //test discontinuity check
 	}
 	//cleanup?
 	return 0;

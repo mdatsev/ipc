@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "gen.h"
 
-#define CYCLIC_BUFFER_SIZE 1 << 14
+#define CYCLIC_BUFFER_SIZE (1 << 14)
 
 struct cyclic_buf
 {

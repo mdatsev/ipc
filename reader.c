@@ -29,10 +29,17 @@ int main()
 	bool first = true;
 	while (true)
 	{
+		if (buffer->wr_pos > pos + CYCLIC_BUFFER_SIZE)
+		{
+			printf("wtf reader:%lu writer:%lu\n", pos, buffer->wr_pos);
+			printf("resynchronizing\n");
+			pos = buffer->wr_pos;
+			first = true;
+		}
 		while (buffer->wr_pos == pos)
 			;
 		prev_seed = seed;
-		seed = verify((void *)buffer->array[pos]);
+		seed = verify((void *)buffer->array[pos % CYCLIC_BUFFER_SIZE]);
 		printf("verified [%lu] - seed %d\n", pos, seed);
 		//printf("%d\n", reads++);
 		if (seed == -1)
@@ -46,7 +53,6 @@ int main()
 			return 2;
 		}
 		pos++;
-		pos %= CYCLIC_BUFFER_SIZE;
 		first = false;
 	}
 
