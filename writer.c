@@ -43,24 +43,16 @@ int main()
 		return -1;
 	}
 	uint32_t seed = 0;
-	//uint64_t initial_pos = 1337 % CYCLIC_BUFFER_SIZE;
-	//generate(&mem->array[initial_pos], 0);
-	//mem->array[initial_pos][0] = seed;
-	//buffer->wr_pos = initial_pos;
-	int writes = 0;
 	struct sigaction sa;
 	sa.sa_handler = signalHandler;
 	sigaction(SIGINT, &sa, NULL);
 
 	while (keepRunning)
 	{
-		//printf("%d\n", writes++);
-		//sleep(1);
 		generate((void *)buffer->array[buffer->wr_pos % CYCLIC_BUFFER_SIZE], seed);
 		printf("generated at [%lu] with seed %d\n", buffer->wr_pos, seed);
 		buffer->wr_pos++;
 		seed++;
-		//if (writes++ == 9000) continue; //test discontinuity check
 	}
 	//cleanup?
 	return 0;

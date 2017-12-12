@@ -1,5 +1,5 @@
-#ifndef _DUMB_SHM_STRUCT
-#define _DUMB_SHM_STRUCT
+#ifndef _CYCLIC_BUF_STRUCT_H_
+#define _CYCLIC_BUF_STRUCT_H_
 
 #include <stdint.h>
 #include "gen.h"

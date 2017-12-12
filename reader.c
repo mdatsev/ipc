@@ -24,7 +24,6 @@ int main()
 	}
 
 	uint64_t pos = buffer->wr_pos;
-	int reads = 0;
 	uint32_t seed, prev_seed;
 	bool first = true;
 	while (true)
@@ -41,7 +40,6 @@ int main()
 		prev_seed = seed;
 		seed = verify((void *)buffer->array[pos % CYCLIC_BUFFER_SIZE]);
 		printf("verified [%lu] - seed %d\n", pos, seed);
-		//printf("%d\n", reads++);
 		if (seed == -1)
 		{
 			printf("block inconsistent");
